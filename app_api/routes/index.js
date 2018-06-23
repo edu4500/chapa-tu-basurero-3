@@ -8,10 +8,11 @@ var iot = require('../controllers/iot');
 router.post( '/iot' ,iot.CrearUbicacion );
 
 //iot actualizar dispositivos iot
-router.post( '/iot/:rolid' ,iot.ActualizarUbicacion );
+router.post( '/iot/:iotid' ,iot.ActualizarUbicacion );
 
 //consultar disostivos iot
 router.get( '/iot',iot.getTodos );
+router.get('/iot2', iot.getTodos2);
 router.get('/iot/basurero', iot.getBasurero);
 router.get('/iot/camion', iot.getCamion);
 

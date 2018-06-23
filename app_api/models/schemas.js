@@ -2,10 +2,11 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
+/*id: { type: String, unique : true, required : true },*/
 var iot_schema = new Schema({
-	id:String,
+	id: String,
 	tipo:String,
-	estado:Number,
+	estado:String,
 	loc: {
 		type: {
 			type: String
