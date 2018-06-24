@@ -9,7 +9,7 @@ router.post( '/iot' ,iot.CrearUbicacion );
 
 //iot actualizar dispositivos iot
 router.post( '/iot/:iotid' ,iot.ActualizarUbicacion );
-router.post('/iot2/:iotid/:tipo/:estado/:lon/:lat', iot.ActualizarUbicacion2);
+router.get('/iot2/:iotid/:tipo/:estado/:lon/:lat', iot.ActualizarUbicacion2);
 
 //consultar disostivos iot
 router.get( '/iot',iot.getTodos );
