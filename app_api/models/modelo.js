@@ -1,8 +1,8 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
 //para cambair el servidor de la base de datos
-var dbURI  = "mongodb://cliente1:cliente1@ds153729.mlab.com:53729/chapatubasusero";
-//var dbURI = "mongodb://localhost:27017/chapatubasusero";
+//var dbURI  = "mongodb://cliente1:cliente1@ds153729.mlab.com:53729/chapatubasusero";
+var dbURI = "mongodb://localhost:27017/chapatubasusero";
 
 if (process.env.NODE_ENV === 'produccion') {
     dbURI = process.env.MONGO_URI;

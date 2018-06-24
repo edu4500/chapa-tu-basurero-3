@@ -154,7 +154,6 @@ module.exports.ActualizarUbicacion = function(req,res){
         if(iot_res){
           iot_res.tipo = req.body.tipo||iot_res.tipo;
           iot_res.estado = req.body.estado||iot_res.estado;
-          iot_res.estado = req.body.estado||iot_res.estado;
           iot_res.loc.coordinates = [req.body.lon||iot_res.lon, req.body.lat||iot_res.lat];
           iot_res.save(err => {
             if (err) {
@@ -186,3 +185,47 @@ module.exports.ActualizarUbicacion = function(req,res){
   });
 }
 
+module.exports.ActualizarUbicacion2 = function (req, res) {
+  var iotid = req.params.iotid;
+  var iot_tipo = req.params.tipo;
+  var iot_estado = req.params.estado;
+  var iot_lon = req.params.lon;
+  var iot_lat = req.params.lat;
+  iot.findOne({
+    id: iotid
+  }, function (err, iot_res) {
+    if (err) {
+      sendJsonResponse(res, 400, err)
+    } else {
+      if (iot_res) {
+        iot_res.tipo = iot_tipo || iot_res.tipo;
+        iot_res.estado = iot_estado || iot_res.estado;
+        iot_res.loc.coordinates = [iot_lon || iot_res.lon, iot_lat || iot_res.lat];
+        iot_res.save(err => {
+          if (err) {
+            sendJsonResponse(res, 400, err)
+          } else {
+            sendJsonResponse(res, 200, iot_res.parseSendRest());
+          }
+        })
+      } else {
+        var nuevoDato = new iot({
+          id: iotid,
+          tipo: req.body.tipo,
+          estado: req.body.estado,
+          loc: {
+            type: "Point",
+            coordinates: [req.body.lon, req.body.lat]
+          }
+        });
+        nuevoDato.save(err => {
+          if (err) {
+            sendJsonResponse(res, 400, err)
+          } else {
+            sendJsonResponse(res, 200, nuevoDato.parseSendRest());
+          }
+        })
+      }
+    }
+  });
+}
