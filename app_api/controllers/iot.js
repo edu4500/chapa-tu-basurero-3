@@ -152,10 +152,10 @@ module.exports.ActualizarUbicacion = function(req,res){
         sendJsonResponse(res, 400, err)
       } else {
         if(iot_res){
-          iot_res.tipo = req.body.tipo;
-          iot_res.estado = req.body.estado;
-          iot_res.estado = req.body.estado;
-          iot_res.loc.coordinates = [req.body.lon, req.body.lat];
+          iot_res.tipo = req.body.tipo||iot_res.tipo;
+          iot_res.estado = req.body.estado||iot_res.estado;
+          iot_res.estado = req.body.estado||iot_res.estado;
+          iot_res.loc.coordinates = [req.body.lon||iot_res.lon, req.body.lat||iot_res.lat];
           iot_res.save(err => {
             if (err) {
               sendJsonResponse(res, 400, err)
